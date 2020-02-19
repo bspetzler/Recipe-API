@@ -4,26 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>YouTube video finder</title>
+    <title>Super Ultra Mega Awesome Recipe Finder</title>
     <link rel="shortcut icon" href="#">
     <link rel="stylesheet" href="index.css">
     <script src="https://developer.edamam.com/attribution/badge.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1>YouTube video finder</h1>
+        <h1>Super Ultra Mega Awesome Recipe Finder</h1>
+        <h2>Find recipes for all sorts of things!</h2>
 
-        <form id="js-form">
+        <form id="search">
             <div id="edamam-badge" data-color="white"></div>
 
             <!-- https://developer.edamam.com/attribution logo is required, follow instructions in link-->
-            <label for="search-term">Search term</label>
-            <input type="text" name="search-term" id="js-search-term" required>
+            <label for="search-term">Search Term</label>
+            <input type="text" name="search-term" id="search-term" required>
             <input type="submit" value="Search">
         </form>
 
-        <form>
-            <label>Diet Label Filter</label>
+        <section class='filters'>
+            <label>Diet Filters</label>
             <input id='Balanced' class='dietLabels' type='checkbox'><buton type='submit' name="balanced">Balanced</buton>
             <input id='High-Protein' class='dietLabels' type='checkbox'><buton type='submit' name="high-protein">High-Protein</buton>
             <input id='Low-Fat' class='dietLabels' type='checkbox'><buton type='submit' name="low-fat">Low-Fat</buton>
@@ -34,11 +35,11 @@
             <input id='Peanut-Free' class='healthLabels' type='checkbox'><buton type='submit' name="peanut-free">Peanut-Free</buton>
             <input id='Tree-Nut-Free' class='healthLabels' type='checkbox'><buton type='submit' name="tree-nut-free">Tree-Nut-Free</buton>
             <input id='Alcohol-Free' class='healthLabels' type='checkbox'><buton type='submit' name="alcohol-free">Alcohol-Free</buton>
-        </form>
+        </section>
 
         <p id="js-error-message" class="error-message"></p>
         <section id="results" class="hidden">
-          <h2>Search results</h2>
+          <h2>Search Results</h2>
           <ul id="results-list">
           </ul>
         </section>

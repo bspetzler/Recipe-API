@@ -98,7 +98,7 @@ function displayResults(responseJson) {
     } else if (dietLabels.length > 0){
       //console.log('only diet labels');
       let result = filterDietLabel(responseJson.hits, dietLabels);
-      //console.log(result);
+      console.log(result);
       createContent(result);
     } else {
       //console.log('only health labels');
@@ -117,7 +117,8 @@ function createContent(results){
       $('#results-list').append(
         `<h3>${results[i].recipe.label}</h3>
         <img src='${results[i].recipe.image}' alt='${results[i].recipe.label} image'>
-        <li>${String(results[i].recipe.ingredientLines).replace(/,/g,'</li><li>').split('</li><li> ').join(', ').split('</li><li>for').join(' for')}</li>`
+        <li>${String(results[i].recipe.ingredientLines).replace(/,/g,'</li><li>').split('</li><li> ').join(', ').split('</li><li>for').join(' for')}</li>
+        <a href='${results[i].recipe.url}'>Link to Recipe</a>`
       )};
   } else {
     $('#results-list').append(
@@ -155,14 +156,14 @@ function getRests(ingredient) { //creates url and uses fetch to get data
     })
     .then(responseJson => displayResults(responseJson))
     .catch(err => {
-      $('#js-error-message').text(`Something went wrong: ${err.message}`);
+      $('#js-error-message').text(`Oops, something must have gone wrong: try again`);
     });
 }
 
 function watchForm() { //gets strings from input once 'search' is pressed
   $('form').submit(event => {
     event.preventDefault();
-    const ing = $('#js-search-term').val();
+    const ing = $('#search-term').val();
 
     //const progressive = $('#js-search-term').val();
 
