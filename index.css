@@ -27,6 +27,10 @@
     display: none;
   }
 
+  .filters{
+    max-width: 550px;
+  }
+
   @media screen and (min-width: 600px) {
-    
+
   }
