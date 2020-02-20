@@ -23,7 +23,6 @@ function formatQueryParams(params) { //puts query together
   const queryItems = Object.keys(params)
     .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
   return queryItems.join('&');
-  console.log(queryItems.join('&'));
 }
 
 /*$('#add-field').on.click(
@@ -72,13 +71,14 @@ function filterHealthLabel(arrayOfObjects, arrayOfFilters){
      // if every time a health label element isn't seen in the arrayOfFilters it gets eliminated, then the length of arrayOfFilters and healthLabels will only be the same if healthLabels includes all the elements of arrayOfFilters
   }) 
   return newArray;
-    }
+    };
 
 function displayResults(responseJson) {
   // if there are previous results, remove them
   // console.log($("input[name='answer']:checked").val());
   // console.log(responseJson.hits[0].recipe.dietLabels);
   $('#results-list').empty();
+  //console.log('getRests ran');
 
   // iterate through the items array
   let dietLabels = Object.values($("input[class='dietLabels']:checked")).filter(function(e,i,arr){
@@ -98,7 +98,7 @@ function displayResults(responseJson) {
     } else if (dietLabels.length > 0){
       //console.log('only diet labels');
       let result = filterDietLabel(responseJson.hits, dietLabels);
-      console.log(result);
+      //console.log(result);
       createContent(result);
     } else {
       //console.log('only health labels');
@@ -107,6 +107,10 @@ function displayResults(responseJson) {
       createContent(result);
     }
     //console.log(responseJson.hits);
+  } else {
+    //console.log('no labels before');
+    createContent(responseJson.hits);
+    //console.log('no labels after');
   }
 };
 
@@ -131,7 +135,7 @@ function createContent(results){
 }
 
 function getRests(ingredient) { //creates url and uses fetch to get data
-  
+  //console.log('getRests ran');
   const params = {
     app_key: apiKey,
     app_id: appID,
@@ -156,7 +160,7 @@ function getRests(ingredient) { //creates url and uses fetch to get data
     })
     .then(responseJson => displayResults(responseJson))
     .catch(err => {
-      $('#js-error-message').text(`Oops, something must have gone wrong: try again`);
+      $('#js-error-message').text(`Oops, something must have gone wrong: wait and try again`);
     });
 }
 
@@ -164,7 +168,7 @@ function watchForm() { //gets strings from input once 'search' is pressed
   $('form').submit(event => {
     event.preventDefault();
     const ing = $('#search-term').val();
-
+    //console.log('watchForm ran');
     //const progressive = $('#js-search-term').val();
 
     getRests(ing);
