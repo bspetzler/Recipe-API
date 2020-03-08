@@ -75,6 +75,7 @@
 
   .filter-label{
     position: relative;
+    margin: 0;
   }
 
   .filters:hover > .filter-label{
