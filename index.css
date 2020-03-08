@@ -4,19 +4,160 @@
   
   body {
     font-family: 'Roboto', sans-serif;
+    background-color: #4DB6AC;
   }
-  
-  button, input[type="text"] {
+
+  .container {
+    margin-left: 45px;
+    margin-top: 45px;
+  }
+
+  .header{
+    background-color: #90A2B2;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+  }
+
+  .header h2{
+    font-size: 25px;
+    margin-top: 0;
+  }
+
+  button {
     padding: 5px;
+    border-style: black solid;
+    border-radius: 5px;
+    border-width: 2px;
+  }
+
+  label[for='search-term']{
+    font-weight: bolder;
+  }
+
+  input[type='text'], 
+  input[type='submit'],
+  .filter-label {
+    display: inline-block;
+    width: 350px;
+    height: auto;
+    font-size: 18px;
+    text-align: left;
+    padding: 15px;
+    border: 2px solid #e7e7e7;
+    border-radius: 5px;
+    background: #fcfcfc;
+    color: #90A2B2;
+  }
+
+  input[type='text'], 
+  input[type='submit'] {
+    margin: 10px 20px 20px 0px;
+  }
+
+  input[type='submit']{
+    background-color: #E57373;
+    border: 2px solid #E57373;
+    font-weight: bolder;
+    color: black;
   }
   
-  button:hover {
+  button:hover, 
+  input[type='submit'] {
     cursor: pointer;
   }
-  
-  .container {
-    max-width: 600px;
-    margin: 0 auto;
+
+  .filters{
+    display: inline-block;
+    max-width: 550px;
+  }
+
+  .filter-label{
+    position: relative;
+  }
+
+  .filters:hover > .filter-label{
+    cursor: pointer;
+    border-radius: 5px 5px 0 0;
+    border-width: 2px 2px 0 2px;
+    padding: 15px 15px 0px 15px;
+  }
+
+  .filter-label:hover + .filter-list{
+    cursor: pointer;
+    display: inline-block;
+    transition: 0.7s;
+  }
+
+  .filter-list{
+    margin: 0;
+    background-color: #fcfcfc;
+    width: 350px;
+    border-radius: 0 0 5px 5px;
+    padding: 15px;
+    font-weight: bolder;
+    flex-direction: column;
+    align-items: flex-start;
+    border: 2px solid #e7e7e7;
+    border-width: 0 2px 2px 2px; 
+    display: none;
+  }
+
+  .filter-list:hover{
+    display: inline-block;
+  }
+
+  .filters li{
+    padding: 0 0 10px;
+    list-style-type: none;
+    width: 300px;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .filters li label{
+    position: relative;
+    left: 20px;
+  }
+
+  input[type='checkbox']{
+    position: absolute;
+    margin: 0;
+    z-index: 1;
+    height: 15px;
+    width: 15px;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+
+  .diet-filter > input[type='checkbox']:checked ~ .checkmark{
+    background-color: rgb(169, 16, 229);
+  }
+
+  input[type='checkbox']:hover,
+  li > label:hover{
+    cursor: pointer;
+  }
+
+  .checkmark{
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    border: 2px solid #e7e7e7;
+    border-radius: 2px;
+    background-color: #fcfcfc;
+  }
+
+  input[type='checkbox']:hover + .checkmark{
+    background-color: #90A2B2
   }
   
   .error-message {
@@ -27,10 +168,65 @@
     display: none;
   }
 
-  .filters{
-    max-width: 550px;
+  /*Result Formatting*/
+
+  #results-list{
+    padding: 0;
   }
 
-  @media screen and (min-width: 600px) {
+  .result{
+    border: 2px solid #e7e7e7;
+    border-radius: 5px;
+    background: #fcfcfc;
+    margin-top: 20px;
+    display: inline-block;
+  }
 
+  h4 a{
+    color: black;
+    font-weight: bolder;
+    margin-left: 20px;
+  }
+
+  h4{
+    margin-bottom: 5px;
+  }
+
+  .result-img{
+    margin-left: 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+
+  .result-ul{
+    list-style-type: none;
+    font-weight: bolder;
+    margin: 5px 10px 10px;
+  }
+
+  .result-ul > li{
+    margin-bottom: 2px;
+  }
+
+  /*Mobile Formatting*/
+
+  @media screen and (max-width: 600px) {
+    .container {
+      max-width: 600px;
+    }
+
+    .header{
+      max-width: 350px;
+    }
+
+    input[type='text'], 
+  input[type='submit'],
+  .filter-label {
+    display: block;
+  }
+
+  input[type='text'], 
+  input[type='submit'] {
+    margin: 10px 0 20px;
+  }
   }

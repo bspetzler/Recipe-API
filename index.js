@@ -18,7 +18,6 @@ const searchURL = 'https://api.edamam.com/search';
 
 //https://api.yelp.com/v3/autocomplete?text=del&latitude=37.786882&longitude=-122.399972
 
-
 function formatQueryParams(params) { //puts query together
   const queryItems = Object.keys(params)
     .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
@@ -120,10 +119,13 @@ function createContent(results){
     for (let i = 0; i < results.length; i++){
       //<li>${String(responseJson.hits[i].recipe.ingredientLines).replace(/,/g,'</li><li>').split('</li><li> peeled').join(', peeled').split('</li><li> thawed').join(', thawed').split('</li><li> quartered').join(', quarted').split('</li><li> finely').join(', finely').split('</li><li> roughly').join(', roughly').split('</li><li> to').join(', to').split('</li><li> smashed').join(', smashed').split('</li><li> seeded').join(', seeded').split('</li><li> softened').join(', softened').split('</li><li> or').join(', or').split('</li><li> sliced').join(', sliced').split('</li><li> and').join(', and').split('</li><li> plus').join(', plus').split('</li><li> bones').join(', bones').split('</li><li> rind').join(', rind').split('</li><li> skin').join(', skin').split('</li><li> about').join(', about').split('</li><li> cut').join(', cut').split('</li><li> at').join(', at').split('</li><li> as').join(', as').split('</li><li> crushed').join(', crushed').split('</li><li> use').join(', use').split('</li><li> flank').join(', flank').split('</li><li> for').join(', for').split('</li><li> divided').join(', divided').split('</li><li> warmed').join(', warmed').split('</li><li> cooked').join(', cooked').split('</li><li> each').join(', each').split('</li><li> heated').join(', heated').split('</li><li>for').join(' for').split('</li><li> cooled').join(', cooled').split('</li><li> sifted').join(', sifted').split('</li><li> melted').join(', melted').split('</li><li> homemade').join(', homemade').split('</li><li> optional').join(', optional').split('</li><li> well').join(', well').split('</li><li> cooled').join(', cooled').split('</li><li>well').join(', well').split('</li><li> room').join(', room').split('</li><li> slightly').join(', slightly').split('</li><li> very').join(', very').split('</li><li> picked').join(', picked').split('</li><li> diced').join(', diced').split('</li><li> halved').join(', halved').split('</li><li> dressed').join(', dressed').split('</li><li> juiced').join(', juiced').split('</li><li> golden').join(', golden').split('</li><li> chopped').join(', chopped').split('</li><li> bag').join(', bag')}</li>`
       $('#results-list').append(
-        `<h4>${results[i].recipe.label}</h4>
-        <img src='${results[i].recipe.image}' alt='${results[i].recipe.label} image'>
-        <li>${String(results[i].recipe.ingredientLines).replace(/,/g,'</li><li>').split('</li><li> ').join(', ').split('</li><li>for').join(' for')}</li>
-        <a href='${results[i].recipe.url}'>Link to Recipe</a>`
+        `<div class='result'>
+          <h4><a href='${results[i].recipe.url}'>${results[i].recipe.label}</a></h4>
+          <img class='result-img' src='${results[i].recipe.image}' alt='${results[i].recipe.label} image'>
+          <ul class='result-ul'>
+            <li>${String(results[i].recipe.ingredientLines).replace(/,/g,'</li><li>').split('</li><li> ').join(', ').split('</li><li>for').join(' for').split('</li><li>chilled').join(' chilled').split('</li><li>well').join(' well')}</li>
+          </ul>
+        </div><br>`
       )};
   } else {
     $('#results-list').append(
