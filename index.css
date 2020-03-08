@@ -180,12 +180,12 @@
     background: #fcfcfc;
     margin-top: 20px;
     display: inline-block;
+    padding: 20px;
   }
 
   h4 a{
     color: black;
     font-weight: bolder;
-    margin-left: 20px;
   }
 
   h4{
@@ -193,7 +193,6 @@
   }
 
   .result-img{
-    margin-left: 20px;
     border-radius: 10px;
     margin-bottom: 10px;
   }
@@ -201,7 +200,8 @@
   .result-ul{
     list-style-type: none;
     font-weight: bolder;
-    margin: 5px 10px 10px;
+    margin: 5px 0px 10px;
+    padding-left: 0;
   }
 
   .result-ul > li{
