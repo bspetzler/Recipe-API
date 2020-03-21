@@ -4,7 +4,7 @@
 Search for recipes based on key words entered.
 Find recipes that fit your dietary restrictions and preferences using the Diet Filters.
 
-(img/Recipe-API-Screenshot.png)
+![Screenshot](img/Recipe-API-Screenshot.png)
 
 ## Problem
 
