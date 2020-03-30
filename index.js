@@ -1,8 +1,13 @@
 'use strict';
-
-const apiKey = '7675276694fb970af08da98b031a5175';
+const STORE = {
+  apiKey: '7675276694fb970af08da98b031a5175',
+  appID: '0093db1a',
+  searchURL: 'https://api.edamam.com/search',
+}
+/*const apiKey = '7675276694fb970af08da98b031a5175';
 const appID = '0093db1a';
 const searchURL = 'https://api.edamam.com/search';
+*/
 
 function formatQueryParams(params) { //puts query together
   const queryItems = Object.keys(params)
@@ -11,14 +16,15 @@ function formatQueryParams(params) { //puts query together
 }
 
 function filterDietLabel(arrayOfObjects, arrayOfFilters){
-  let newArray = arrayOfObjects.filter(function(elementOfArray){
+  const newArray = arrayOfObjects.filter(function(elementOfArray){
     // the first true or false statement revolves around whether the dietLabels array contains all the elements of arrayOfFilters
+    // arrayOfFilters is an array of all the available filters possible for diet choices (dietLabels)
     // enter into diet labels array
-     let dietFilt = elementOfArray.recipe.dietLabels.filter(function(element){
+     const dietFilt = elementOfArray.recipe.dietLabels.filter(function(element){
        return arrayOfFilters.includes(element);
        // look at the arrayOfFilters and see if it inlcudes the element of dietLabels that is focused on
        // if it does not it will filter it out
-       // the end result of this function is an array only of the healthLabels elements that can be found in arrayOfFilters
+       // the end result of this function is an array only of the dietLabels elements that can be found in arrayOfFilters
      })
      return dietFilt.length == arrayOfFilters.length;
      // does the length of filtered dietLabels match the length of arrayOfFilters
@@ -28,9 +34,9 @@ function filterDietLabel(arrayOfObjects, arrayOfFilters){
     };
 
 function filterHealthLabel(arrayOfObjects, arrayOfFilters){ // uses the same methodology as filterDietLabel function
-  let newArray = arrayOfObjects.filter(function(elementOfArray){
+  const newArray = arrayOfObjects.filter(function(elementOfArray){
 
-     let healthFilt = elementOfArray.recipe.healthLabels.filter(function(element){
+     const healthFilt = elementOfArray.recipe.healthLabels.filter(function(element){
        return arrayOfFilters.includes(element);
      })
      return healthFilt.length == arrayOfFilters.length;
@@ -44,22 +50,22 @@ function displayResults(responseJson) {
   $('#js-error-message').html("");
 
   // iterate through the items array
-  let dietLabels = Object.values($("input[class='dietLabels']:checked")).filter(function(e,i,arr){
+  const dietLabels = Object.values($("input[class='dietLabels']:checked")).filter(function(e,i,arr){
     return i < arr.length - 2; // there are 2 extra elements in this array always
   }).map(e => e.id);
-  let healthLabels = Object.values($("input[class='healthLabels']:checked")).filter(function(e,i,arr){
+  const healthLabels = Object.values($("input[class='healthLabels']:checked")).filter(function(e,i,arr){
     return i < arr.length - 2;
   }).map(e => e.id);
 
   if (dietLabels.length || healthLabels.length > 0){ // decide which use-case is needed. dietLabels and healthLabels are in 2 different arrays within the response object even though they look the same to the user
     if (dietLabels.length && healthLabels.length > 0){
-      let result = filterHealthLabel(filterDietLabel(responseJson.hits, dietLabels), healthLabels);
+      const result = filterHealthLabel(filterDietLabel(responseJson.hits, dietLabels), healthLabels);
       createContent(result);
     } else if (dietLabels.length > 0){
-      let result = filterDietLabel(responseJson.hits, dietLabels);
+      const result = filterDietLabel(responseJson.hits, dietLabels);
       createContent(result);
     } else {
-      let result = filterHealthLabel(responseJson.hits, healthLabels);
+      const result = filterHealthLabel(responseJson.hits, healthLabels);
       createContent(result);
     }
   } else {
@@ -71,13 +77,13 @@ function createContent(results){ // create content to display on page
   if (results.length != 0){
     for (let i = 0; i < results.length; i++){
       $('#results-list').append(
-        `<div class='result'>
-          <h4><a href='${results[i].recipe.url}'>${results[i].recipe.label}</a></h4>
+        `<li class='result'>
+          <h3><a href='${results[i].recipe.url}' target='_blank'>${results[i].recipe.label}</a></h3>
           <img class='result-img' src='${results[i].recipe.image}' alt='${results[i].recipe.label} image'>
           <ul class='result-ul'>
             <li>${String(results[i].recipe.ingredientLines).replace(/,/g,'</li><li>').split('</li><li> ').join(', ').split('</li><li>for').join(' for').split('</li><li>chilled').join(' chilled').split('</li><li>well').join(' well')}</li>
           </ul>
-        </div><br>`
+        </li>`
       )};
   } else {
     $('#results-list').append(
@@ -91,14 +97,14 @@ function createContent(results){ // create content to display on page
 
 function getRests(ingredient) { //creates url and uses fetch to get data
   const params = {
-    app_key: apiKey,
-    app_id: appID,
+    app_key: STORE.apiKey,
+    app_id: STORE.appID,
     q: ingredient,
     to: 100,
   };
 
   const queryString = formatQueryParams(params)
-  const url = searchURL + '?' + queryString;
+  const url = STORE.searchURL + '?' + queryString;
 
   fetch(url)
     .then(response => {
@@ -109,6 +115,7 @@ function getRests(ingredient) { //creates url and uses fetch to get data
     })
     .then(responseJson => displayResults(responseJson))
     .catch(err => {
+      $('#js-error-message').html("");
       $('#js-error-message').append(`Oops, something must have gone wrong: wait and try again`);
     });
 }

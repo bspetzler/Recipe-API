@@ -5,11 +5,12 @@
   body {
     font-family: 'Roboto', sans-serif;
     background-color: #4DB6AC;
+    display: inline-block;
+    width: 100%;
   }
 
   .container {
-    margin-left: 45px;
-    margin-top: 45px;
+    margin: 10px;
   }
 
   .header{
@@ -40,8 +41,8 @@
   input[type='text'], 
   input[type='submit'],
   .filter-label {
-    display: inline-block;
-    width: 350px;
+    display: block;
+    width: 300px;
     height: auto;
     font-size: 18px;
     text-align: left;
@@ -49,12 +50,12 @@
     border: 2px solid #e7e7e7;
     border-radius: 5px;
     background: #fcfcfc;
-    color: #90A2B2;
+    color: black;
   }
 
   input[type='text'], 
   input[type='submit'] {
-    margin: 10px 20px 20px 0px;
+    margin: 10px 0 20px;
   }
 
   input[type='submit']{
@@ -71,31 +72,35 @@
 
   .filters{
     display: inline-block;
-    max-width: 550px;
+    width: 300px;
   }
 
   .filter-label{
     position: relative;
     margin: 0;
-  }
-
-  .filters:hover > .filter-label{
-    cursor: pointer;
     border-radius: 5px 5px 0 0;
     border-width: 2px 2px 0 2px;
     padding: 15px 15px 0px 15px;
   }
 
+  .filters:hover > .filter-label{
+    cursor: pointer;
+  }
+
   .filter-label:hover + .filter-list{
     cursor: pointer;
     display: inline-block;
-    transition: 0.7s;
+  }
+
+  .filter-label:focus + .filter-list{
+    cursor: pointer;
+    display: inline-block;
   }
 
   .filter-list{
     margin: 0;
     background-color: #fcfcfc;
-    width: 350px;
+    width: 300px;
     border-radius: 0 0 5px 5px;
     padding: 15px;
     font-weight: bolder;
@@ -103,10 +108,13 @@
     align-items: flex-start;
     border: 2px solid #e7e7e7;
     border-width: 0 2px 2px 2px; 
-    display: none;
   }
 
   .filter-list:hover{
+    display: inline-block;
+  }
+
+  .filter-list:focus{
     display: inline-block;
   }
 
@@ -161,9 +169,13 @@
   input[type='checkbox']:hover + .checkmark{
     background-color: #90A2B2
   }
+
+  input[type='checkbox']:focus + .checkmark{
+    background-color: #90A2B2
+  }
   
   .error-message {
-      color: red;
+      color: #320C16;
   }
   
   .hidden {
@@ -172,7 +184,7 @@
 
   /*Result Formatting*/
 
-  #results > h4{
+  #results > h3{
     margin-top: 60px;
     margin-bottom: 10px;
     font-size: 35px;
@@ -188,17 +200,17 @@
     border-radius: 5px;
     background: #fcfcfc;
     margin-top: 20px;
-    display: inline-block;
+    display: table;
     padding: 20px;
     margin-right: 45px;
   }
 
-  h4 a{
+  h3 a{
     color: black;
     font-weight: bolder;
   }
 
-  h4{
+  h3{
     margin-bottom: 5px;
     margin-top: 0;
   }
@@ -219,29 +231,18 @@
     margin-bottom: 2px;
   }
 
-  /*Mobile Formatting*/
+  /*Desktop Formatting*/
 
-  @media screen and (max-width: 576px) {
-    .container {
-      max-width: 576px;
-    }
-
-    .header{
-      max-width: 350px;
-    }
-
-    .result{
-      max-width: 350px;
-    }
+  @media screen and (min-width: 576px) {
 
     input[type='text'], 
   input[type='submit'],
   .filter-label {
-    display: block;
+    display: inline-block;
   }
 
   input[type='text'], 
   input[type='submit'] {
-    margin: 10px 0 20px;
+    margin: 10px 20px 20px 0px;
   }
   }
