@@ -79,7 +79,7 @@ function createContent(results){ // create content to display on page
       $('#results-list').append(
         `<li class='result'>
           <h3><a href='${results[i].recipe.url}' target='_blank'>${results[i].recipe.label}</a></h3>
-          <img class='result-img' src='${results[i].recipe.image}' alt='${results[i].recipe.label} image'>
+          <img class='result-img' style="width:266px" src='${results[i].recipe.image}' alt='${results[i].recipe.label} image'>
           <ul class='result-ul'>
             <li>${String(results[i].recipe.ingredientLines).replace(/,/g,'</li><li>').split('</li><li> ').join(', ').split('</li><li>for').join(' for').split('</li><li>chilled').join(' chilled').split('</li><li>well').join(' well')}</li>
           </ul>
